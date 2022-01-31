@@ -4,7 +4,7 @@ const cors = require('cors')
 const db = require('./data/db-config')
 
 function getAllUsers() { return db('users') }
-
+//
 async function insertUser(user) {
   // WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
   // AND OBTAIN WHATEVER COLUMNS WE NEED FROM THE NEWLY CREATED/UPDATED RECORD
