@@ -4,18 +4,21 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "migrate:dev": "knex migrate:latest",
-    "rollback:dev": "knex migrate:rollback",
-    "seed:dev": "knex seed:run",
-    "migrate:prod": "heroku run knex migrate:latest -a YOUR_HEROKU_APP_NAME",
-    "rollback:prod": "heroku run knex migrate:rollback -a YOUR_HEROKU_APP_NAME",
-    "database:prod": "heroku pg:psql -a YOUR_HEROKU_APP_NAME",
-    "seed:prod": "heroku run knex seed:run -a YOUR_HEROKU_APP_NAME",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
+    "resetdb": "npm run rollback && npm run migrate && npm run seed",
+    "migrateh": "heroku run knex migrate:latest -a marketplace-be-02",
+    "rollbackh": "heroku run knex migrate:rollback -a marketplace-be-02",
+    "databaseh": "heroku pg:psql -a marketplace-be-02",
+    "seedh": "heroku run knex seed:run -a marketplace-be-02",
+    "resetdbh": "npm run rollbackh && npm run migrateh && npm run seedh",
     "test": "cross-env NODE_ENV=testing jest --verbose --runInBand",
     "deploy": "git push heroku main"
   },
   "engines": {
-    "node": "16.13.2"
+    "node": "16.13.2",
+    "npm": "6.14.11"
   },
   "license": "ISC",
   "dependencies": {
