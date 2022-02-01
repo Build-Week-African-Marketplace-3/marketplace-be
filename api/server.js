@@ -5,7 +5,7 @@ const db = require('./data/db-config')
 
 const session = require('express-session')
 const Store = require('connect-session-knex')(session)
-const knex = require('../data/db-config')
+const knex = require('./data/db-config')
 
 const authRouter = require('../api/data/auth/auth-router')
 const usersRouter = require('../api/data/users/users-router')
