@@ -45,7 +45,7 @@ router.post("/login", checkPayload, async (req, res, next) => {
 });
 
 // LOGOUT USER
-router.get("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
   if (req.session) {
     req.session.destroy((err) => {
       if (err) {
