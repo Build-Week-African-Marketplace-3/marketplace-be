@@ -5,6 +5,7 @@ async function find() {
   const users = allUsers.map((user) => {
     const userTest = {
       id: user.id,
+      name: user.name,
       username: user.username,
       location: user.location
     };
@@ -31,11 +32,17 @@ async function findById(id) {
   const [user] = await db("users")
     .where("id", id)
     .select("id", "name","username", "location");
+
+  const items = await db('items')
+  .orderBy('item_id','asc')
+  .where("user_id", id)
+
   const userTest = {
     id: user.id,
     name: user.id,
     username: user.username,
-    location: user.location
+    location: user.location,
+    items_list: items
   };
   return userTest;
   

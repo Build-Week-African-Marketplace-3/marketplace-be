@@ -27,9 +27,9 @@ router.get('/', async (req, res, next) => {
             .catch(next)
     })
     
-    router.put('/updateitem/:items_id', (req,res,next)=>{
+    router.put('/updateitem/:item_id', (req,res,next)=>{
         const changes=req.body
-        items.updateItem(changes,req.params.items_id)
+        items.updateItem(changes,req.params.item_id)
         .then(updateditem=>{
             if(updateditem){
                 res.status(200).json(updateditem)
@@ -40,16 +40,16 @@ router.get('/', async (req, res, next) => {
         .catch(next)
     })
     
-    router.delete('/deleteitem/:items_id', (req, res, next)=>{
-        const{items_id}=req.params
+    router.delete('/deleteitem/:item_id', (req, res, next)=>{
+        const{item_id}=req.params
     
-        items.removeItem(items_id)
+        items.removeItem(item_id)
         .then(p=>{
             if(p){
-                res.json({message:`items_id ${items_id} is removed`, removed:p})
+                res.json({message:`items_id ${item_id} is removed`, removed:p})
             }
             else{
-                res.status(404).json({message:"Could not find any item with provided items_id"})
+                res.status(404).json({message:"Could not find any item with provided item_id"})
             }
         })
         .catch(next)

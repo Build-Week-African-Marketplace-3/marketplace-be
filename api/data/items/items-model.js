@@ -13,7 +13,7 @@ function findBy(filter){
 }
 
 function addItem(user_id, item){
-    return db('item')
+    return db('items')
     .insert({
         ...item,
         user_id
@@ -21,27 +21,27 @@ function addItem(user_id, item){
     .then(()=>{
         return db('items')
         .join('users', 'users.id','items.user_id')
-        .select('items_id','items.name','items.price','items.description','items.image','users.name','users.location')
+        .select('item_id','items.name','items.price','items.description','items.image','users.name','users.location')
         .orderBy('items_id','desc')
         .where('users.id', user_id)
     })
 }
 
-function updateItem(changes,items_id) {
+function updateItem(changes,item_id) {
     return db('items')
-      .where({ items_id })
+      .where({ item_id })
       .update(changes)
     //   .then(result => {
     //     return result
     //   })
       .then(count => {
-        return findBy({items_id})
+        return findBy({item_id})
       })
   }
 
-async function removeItem(items_id){
-    const result = await db('items').where({items_id}).first()
-    const removed= await db('items').where('items_id',items_id).del()
+async function removeItem(item_id){
+    const result = await db('items').where({item_id}).first()
+    const removed= await db('items').where('item_id',item_id).del()
     return result
    
     // return db('items').where({item_id}).del()
