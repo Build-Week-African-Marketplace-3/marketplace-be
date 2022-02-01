@@ -23,7 +23,11 @@ router.get("/:id", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   Users.update(req.params.id, req.body)
     .then((user) => {
-      res.status(200).json(user);
+      if(user){
+        res.status(200).json(user);
+      }else{
+        res.json({message:"there are no user with that id to update"})
+      }
     })
     .catch(next);
 });

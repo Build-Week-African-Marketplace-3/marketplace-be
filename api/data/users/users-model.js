@@ -60,7 +60,9 @@ async function update(id, changes) {
   return db("users")
     .where("id", id)
     .update(changes)
-    .then((count) => (count > 0 ? findById(id) : null));
+    .then(count => {
+      return findById(id)
+    })
 }
 
 module.exports = { add, find, findBy, update, findById };

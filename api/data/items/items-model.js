@@ -9,7 +9,7 @@ function findItemsForUser(user_id){
 }
 
 function findBy(filter){
-    return db('plants').where(filter).first()
+    return db('items').where(filter).first()
 }
 
 function addItem(user_id, item){
