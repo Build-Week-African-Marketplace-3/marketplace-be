@@ -21,21 +21,24 @@ router.post("/register", async (req, res, next) => {
 // LOGIN USER
 router.post("/login", checkPayload, async (req, res, next) => {
   try {
-    const { username } = req.body;
+    const { username, password } = req.body
     const [currentUser] = await Users.findBy({ username });
 
     const token = helpers.buildToken(req.body.username);
-
-    if(bcrypt.compareSync(password, req.user.password)){
-      req.session.user = req.user
-      //add user to session and check password matches
-      res.json({
-        token,
-        currentUser,
-        message: `Welcome ${req.user.username}`})
-    }else{
-      next({status:401, message: 'Invalid credentials'})
+    if (!currentUser) {
+      return next({ message: 'invalid credentials', status: 401 })
     }
+
+    const verifies = bcrypt.compareSync(password, currentUser.password)
+    if (!verifies) {
+      return next({ message: 'invalid credentials', status: 401 })
+    }
+    req.session.user = currentUser
+    res.status(200).json({
+      token,
+      currentUser,
+      message: `Welcome back ${req.body.username}`
+    });
   } catch (error) {
     next(error);
   }

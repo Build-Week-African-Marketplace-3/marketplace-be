@@ -20,6 +20,7 @@ async function findBy(filter) {
     const userTest = {
       id: user.id,
       name: user.name,
+      password: user.password,
       username: user.username,
       location: user.location
     };
