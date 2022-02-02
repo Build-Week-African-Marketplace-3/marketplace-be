@@ -22,10 +22,7 @@ function addItem(user_id, item){
     })
     .then(()=>{
         return db('items')
-        .join('users', 'users.id','items.user_id')
-        .select('item_id','items.name','items.price','items.description','items.image','users.name','users.location')
-        .orderBy('items_id','desc')
-        .where('users.id', user_id)
+        .where('user_id', user_id)
     })
 }
 
