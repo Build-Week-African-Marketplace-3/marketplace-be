@@ -11,7 +11,9 @@ function findItemsForUser(user_id){
 function findBy(filter){
     return db('items').where(filter).first()
 }
-
+function findById(item_id){
+    return db('items').where('item_id', item_id)
+}
 function addItem(user_id, item){
     return db('items')
     .insert({
@@ -27,15 +29,12 @@ function addItem(user_id, item){
     })
 }
 
-function updateItem(changes,item_id) {
+function updateItem(changes, item_id) {
     return db('items')
-      .where({ item_id })
+      .where('item_id', item_id)
       .update(changes)
-    //   .then(result => {
-    //     return result
-    //   })
       .then(count => {
-        return findBy({item_id})
+        return findById(item_id)
       })
   }
 
@@ -49,5 +48,5 @@ async function removeItem(item_id){
 }
 
 module.exports = {
-    findAllItems, findBy, findItemsForUser, addItem, updateItem, removeItem
+    findAllItems, findBy, findById, findItemsForUser, addItem, updateItem, removeItem
 }

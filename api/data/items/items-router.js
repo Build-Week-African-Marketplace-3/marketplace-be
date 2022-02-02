@@ -28,9 +28,8 @@ router.get('/', async (req, res, next) => {
     })
     
     router.put('/updateitem/:item_id', (req,res,next)=>{
-        const changes=req.body
-        items.updateItem(changes,req.params.item_id)
-        .then(updateditem=>{
+        items.updateItem(req.body, req.params.item_id)
+        .then((updateditem)=>{
             if(updateditem){
                 res.status(200).json(updateditem)
             } else {
